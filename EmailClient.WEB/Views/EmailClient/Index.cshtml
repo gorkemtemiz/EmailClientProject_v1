@@ -1,0 +1,53 @@
+﻿@using EmailClients.WEB.Models;
+@model List<EmailClients.WEB.Models.EmailClient>
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    div.yarila{max-width:50%}
+</style>
+    @{ var clientList = ViewData["emailClients"] as List<EmailClient>;
+        <title> @ViewBag.Title = "ClientListe"; </title>
+    }
+</head>
+<body>
+    <div>
+        <div class="yarila" id="list" align="left">
+         <h2> List of Registered Clients</h2>
+            <ul>
+                @foreach (var client in Model)
+                 {
+                <li>
+                    <b>Ad:</b> @client.Name
+                    <br />
+                    <b>Soyad:</b> @client.Surname
+                    <br />
+                    <b>Nick:</b> @client.Nickname
+                    <br />
+                    <b>Yaş:</b> @client.Age.ToString()
+                    <br> <br />
+                </li>
+                 }
+            </ul>
+        </div>
+        <div class="yarila" id="register" align="right" style="float:right">
+            <h2> Registration of a New Client </h2>
+            @using (Html.BeginForm("SendMethod", "EmailClient", FormMethod.Post))
+             {
+                <b>Ad:</b> @Html.TextBox("name")
+                <br />
+                <b>Soyad:</b> @Html.TextBox("surName")
+                <br />
+                <b>Nick:</b> @Html.TextBox("nickName")
+                <br />
+                <b>Yaş:</b> @Html.TextBox("age")
+                <br>
+                <b>e-Mail:</b> @Html.TextBox("eMail")
+                <br />
+                <input type="submit" name="submitButton" value="Send" />
+             }
+        </div>
+    </div>
+</body>
+</html>
